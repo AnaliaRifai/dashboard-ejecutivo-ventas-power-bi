@@ -1,129 +1,139 @@
-# 📊 Dashboard Ejecutivo de Ventas | Power BI
+# Dashboard Ejecutivo de Ventas | Power BI
 
-Proyecto de análisis de datos desarrollado en **Power BI** a partir de un conjunto de datos de ventas con errores e inconsistencias intencionales.
+Proyecto de análisis de ventas de 2024 desarrollado en **Power BI** a partir de un archivo Excel con inconsistencias intencionales. El trabajo abarca la limpieza y validación de los datos, el modelado, la creación de medidas DAX y el diseño de un dashboard interactivo para evaluar resultados comerciales.
 
-El proyecto abarca el flujo completo de análisis: **limpieza y transformación de datos con Power Query, modelado de datos, creación de medidas DAX y desarrollo de un dashboard ejecutivo interactivo**, orientado al análisis del desempeño comercial y la toma de decisiones.
+## Herramientas utilizadas
 
-<br>
+- **Excel:** fuente de datos del proyecto.
+- **Power Query:** limpieza, transformación y validación.
+- **Power BI:** modelo de datos, visualizaciones e interactividad.
+- **DAX:** indicadores de ventas, inteligencia temporal, rankings y cumplimiento de metas.
 
-## 🎯 Objetivo
+## Objetivo y preguntas de negocio
 
-Transformar datos de ventas sin procesar en información clara y útil para responder preguntas de negocio relacionadas con:
+El objetivo fue convertir los datos de ventas en información útil para el seguimiento comercial y responder:
 
-- Cumplimiento de metas de ventas.
-- Evolución de las ventas en el tiempo.
-- Productos con mejor desempeño.
-- Clientes con mayor impacto.
-- Participación de los distintos canales de venta.
+1. ¿Se alcanzaron las metas de ventas?
+2. ¿Cómo evolucionaron las ventas durante 2024?
+3. ¿Qué productos generaron mayor facturación?
+4. ¿Qué clientes tuvieron mayor participación?
+5. ¿Qué canal aportó más ventas?
 
-<br>
+## Estructura del repositorio
 
-## 🔄 Proceso de análisis
+```text
+power-bi-sales-executive-dashboard/
+├── dataset/
+│   └── proyecto_powerbi_avanzado_dirty.xlsx
+├── screenshots/
+│   ├── dashboard-general.png
+│   ├── dashboard-filtro-mes.png
+│   ├── dashboard-filtro-canal.png
+│   └── modelo-datos.png
+├── Proyecto Avanzado PBI Rifai.pbix
+├── medidas_dax_documentacion.md
+└── README.md
+```
 
-### 1. Limpieza y transformación de datos
+La carpeta `dataset` contiene el archivo original de trabajo. El archivo `.pbix` contiene el modelo y el informe interactivo. Las capturas documentan la vista general del dashboard, dos ejemplos de filtrado y el modelo de datos.
 
-Se utilizó **Power Query** para preparar y transformar las tablas antes de realizar el análisis.
+## Exploración y preparación de los datos (EDA y ETL)
 
-Entre las principales tareas realizadas se encuentran:
+Se partió de cinco tablas: **ventas, productos, clientes, canales y metas comerciales**.
 
-- Limpieza y estandarización de textos y categorías.
-- Corrección de formatos y tipos de datos.
-- Tratamiento de valores nulos y registros inconsistentes.
-- Validación de fechas y columnas numéricas.
-- Preparación de las tablas para su posterior modelado.
+En **Power Query** se realizaron las principales transformaciones:
 
-### 2. Modelado de datos
+- **Ventas:** exclusión de dos registros sin fecha de venta; normalización de identificadores, textos, precios y costos; reemplazo de descuentos nulos por cero. Se conservaron las cantidades negativas asociadas a devoluciones. La tabla final contiene **578 registros**.
+- **Productos:** estandarización de nombres y categorías, corrección de tipos numéricos y eliminación de un identificador duplicado. La dimensión quedó con **12 productos únicos**.
+- **Clientes:** normalización de países, segmentos y correos electrónicos. Se conservaron los **20 clientes**, incluido un correo faltante que no afectaba el análisis.
+- **Canales:** limpieza de textos y corrección de comisiones para **Online, Tienda y Distribuidor**.
+- **Metas:** verificación de **36 registros**, correspondientes a los 12 meses de 2024 para los tres canales.
 
-Se construyó un **modelo de datos en estrella**, relacionando la tabla de ventas con las dimensiones correspondientes.
+Se revisó la calidad de las columnas relevantes y los campos necesarios para las relaciones y los indicadores.
 
-El modelo incluye:
+### Criterio comercial utilizado
 
-- Tabla de hechos de ventas.
-- Dimensión de clientes.
-- Dimensión de productos.
-- Dimensión de canales.
-- Tabla calendario.
-- Tabla de metas de ventas.
-- Tabla dedicada a medidas.
+Las medidas principales de facturación, unidades vendidas y transacciones contabilizan **únicamente los pedidos con estado `Entregado`**. Los registros pendientes, cancelados y devueltos permanecen en el dataset, pero no se incluyen en estos KPI.
 
-### 3. Medidas DAX
+Esta definición resultó fundamental: al corregir el indicador, el cumplimiento anual de metas pasó del **117,77 %** al **95,44 %**. El cambio muestra por qué es necesario validar el significado de cada métrica, además de comprobar que su fórmula funcione.
 
-Se desarrollaron medidas para analizar el desempeño comercial, incluyendo:
+## Modelo de datos
 
-- Ventas totales.
-- Cantidad vendida.
-- Total de transacciones.
-- Ticket promedio.
-- Ventas del período anterior.
-- Variación de ventas.
-- Variación porcentual.
-- Ventas acumuladas.
-- Meta de ventas.
-- Cumplimiento de meta.
-- Rankings y participación.
-- Insight automático dinámico.
+Se construyó un **modelo en estrella** con `TblFactVentas` como tabla central, relacionada mediante vínculos activos de uno a muchos y filtrado unidireccional con las dimensiones:
 
-<br>
+- `TblDimCliente`
+- `TblDimProducto`
+- `TblDimCanal`
+- `Tabla Calendario`
 
-## 📈 Dashboard ejecutivo
+La tabla calendario se creó con DAX, contiene las **366 fechas de 2024** y fue configurada como tabla de fechas.
 
-El dashboard permite analizar el desempeño del negocio mediante:
+`TblMetasVentas` se mantuvo sin relaciones físicas: la medida de metas utiliza **`TREATAS`** para aplicar los filtros de año, mes y canal. Las métricas se organizaron en una tabla independiente denominada `Medidas`.
 
-- KPIs de ventas, metas, cumplimiento, variación y ticket promedio.
-- Evolución temporal de ventas y comparación contra metas.
-- Análisis por cliente, producto y canal.
-- Rankings y participación sobre las ventas.
-- Segmentadores para realizar análisis dinámicos.
-- Insight automático que se actualiza según los filtros seleccionados.
+![Modelo de datos](screenshots/modelo-datos.png)
 
-<br>
+## Medidas DAX
 
-## 🛠️ Herramientas utilizadas
+Se desarrollaron **16 medidas**, organizadas en métricas base, cálculos temporales, rankings, participación de clientes, metas e insight automático.
 
-- **Power BI** — modelado, análisis y visualización de datos.
-- **Power Query** — limpieza y transformación de datos.
-- **DAX** — creación de medidas, KPIs y cálculos de negocio.
-- **Microsoft Excel** — fuente de datos utilizada para el análisis.
+Entre las funciones utilizadas se encuentran `CALCULATE`, `SUMX`, `DIVIDE`, `DISTINCTCOUNT`, `DATEADD`, `TOTALYTD`, `RANKX`, `REMOVEFILTERS`, `TREATAS`, `TOPN` y `SWITCH`.
 
-<br>
+Las fórmulas finales y sus explicaciones están en **[Documentación de medidas DAX](medidas_dax_documentacion.md)**.
 
-## 🖼️ Vista del proyecto
+## Dashboard e interactividad
 
-### Dashboard Ejecutivo
+El informe permite explorar los resultados mediante cinco segmentadores: **Mes, País, Canal, Categoría y Segmento**. Incluye tarjetas de ventas, meta, cumplimiento, variación y ticket promedio; gráficos de evolución mensual, ventas frente a metas y desempeño por cliente, producto y canal; un ranking de clientes y un texto de insight generado con DAX.
 
-Vista principal del dashboard con KPIs, análisis temporal, rankings, segmentadores e insight automático.
+Se personalizaron las interacciones para preservar el contexto de comparación:
 
-![Dashboard Ejecutivo](Dashboard-Ejecutivo.png)
+- Al seleccionar un **mes**, los indicadores y rankings se actualizan, mientras que los dos gráficos temporales mantienen la vista de todo 2024.
+- Al seleccionar un **canal**, los indicadores y el resto del informe se actualizan, pero el gráfico de ventas por canal conserva la comparación entre los tres canales.
 
-### Limpieza y transformación con Power Query
+![Dashboard general](screenshots/dashboard-general.png)
 
-Proceso de preparación de los datos mediante consultas y pasos de transformación antes de construir el modelo.
+**Ejemplos de interactividad:** [Filtro por mes](screenshots/dashboard-filtro-mes.png) · [Filtro por canal](screenshots/dashboard-filtro-canal.png)
 
-![Power Query](Power-Query-limpieza.png)
+## Hallazgos comerciales de 2024
 
-### Modelo de datos
+### 1. La meta anual no se alcanzó, aunque hubo seis meses consecutivos de cumplimiento
 
-Modelo utilizado para relacionar la tabla de ventas con las dimensiones, calendario y metas necesarias para el análisis.
+| Indicador | Resultado |
+|---|---:|
+| Ventas de pedidos entregados | $1.244.108,50 |
+| Meta anual | $1.303.553 |
+| Cumplimiento | **95,44 %** |
+| Diferencia frente a la meta | **-$59.444,50** |
 
-![Modelo de datos](Modelo-Datos.png)
+El análisis mensual permitió identificar **tres períodos**:
 
-<br>
+- **Enero–abril:** ningún mes alcanzó la meta.
+- **Mayo–octubre:** seis meses consecutivos con ventas superiores a las metas mensuales. **Junio** registró el mayor importe de ventas (**$144.524,31**) y el mayor cumplimiento (**130,31 %**).
+- **Noviembre–diciembre:** los resultados volvieron a quedar por debajo de sus objetivos.
 
-## 📁 Archivos del repositorio
+El buen desempeño de mayo a octubre no fue suficiente para compensar los desvíos negativos del resto del año. Este patrón no se observa al mirar únicamente el KPI anual.
 
-- **Proyecto Avanzado PBI Rifai.pbix** — archivo principal del proyecto desarrollado en Power BI.
-- **proyecto_powerbi_avanzado_dirty.xlsx** — dataset utilizado como fuente del análisis.
-- **dashboard-ejecutivo.png** — vista del dashboard final.
-- **power-query-limpieza.png** — vista del proceso de transformación.
-- **modelo-datos.png** — vista del modelo de datos.
+**Recomendación:** comparar productos, clientes y canales de los meses de mayor cumplimiento con los períodos que quedaron por debajo de las metas, para identificar oportunidades de mejora. Los datos permiten detectar el patrón, pero no establecer sus causas sin un análisis adicional.
 
-<br>
+### 2. Dos laptops concentraron una parte importante de la facturación
 
-## ▶️ Cómo explorar el proyecto
+**Laptop Air 13** fue el producto líder, con **$290.593,58**, seguido de **Laptop Pro 14**, con **$238.298,18**. Juntas representaron aproximadamente **42,5 %** de las ventas anuales.
 
-1. Descargar el archivo `.pbix` disponible en este repositorio.
-2. Abrirlo utilizando **Power BI Desktop**.
-3. Explorar el dashboard y utilizar los segmentadores para analizar diferentes escenarios.
-4. Consultar el modelo de datos, las transformaciones realizadas en Power Query y las medidas DAX desarrolladas.
+**Recomendación:** analizar su desempeño por período y canal y complementar la facturación con información de márgenes antes de definir acciones comerciales.
 
-> **Nota:** para visualizar y editar el archivo `.pbix` es necesario tener Power BI Desktop instalado.
+### 3. Beta Market fue el cliente principal
+
+**Beta Market** generó **$127.142,98**, equivalentes al **10,22 %** de las ventas anuales. Le siguieron **Grupo Nova** y **Omega Tech**.
+
+**Recomendación:** hacer seguimiento de los principales clientes y explorar oportunidades en el resto de la cartera, sin interpretar la concentración de ventas como un riesgo demostrado por sí solo.
+
+### 4. Online fue el canal con mayor facturación
+
+El canal **Online** aportó aproximadamente **$475.878** (**38,3 %** del total), por delante de Distribuidor y Tienda.
+
+**Recomendación:** estudiar el potencial de crecimiento del canal junto con sus costos y comisiones. Mayor facturación no implica necesariamente mayor rentabilidad.
+
+## Conclusión
+
+El proyecto permitió recorrer un proceso de análisis de punta a punta: preparar datos con inconsistencias, construir un modelo de datos, definir indicadores de negocio, desarrollar un dashboard interactivo y convertir los resultados en hallazgos y recomendaciones.
+
+El aprendizaje más importante fue la necesidad de **validar los criterios comerciales detrás de las medidas**: una fórmula puede funcionar correctamente y, aun así, conducir a conclusiones equivocadas si incluye operaciones que no corresponden al indicador analizado.
