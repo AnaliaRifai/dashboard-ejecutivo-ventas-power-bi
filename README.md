@@ -90,9 +90,19 @@ Se personalizaron las interacciones para preservar el contexto de comparación:
 - Al seleccionar un **mes**, los indicadores y rankings se actualizan, mientras que los dos gráficos temporales mantienen la vista de todo 2024.
 - Al seleccionar un **canal**, los indicadores y el resto del informe se actualizan, pero el gráfico de ventas por canal conserva la comparación entre los tres canales.
 
+
+### Dashboard general
+
 ![Dashboard general](screenshots/dashboard-general.png)
 
-**Ejemplos de interactividad:** [Filtro por mes](screenshots/dashboard-filtro-mes.png) · [Filtro por canal](screenshots/dashboard-filtro-canal.png)
+### Filtro por mes: septiembre de 2024
+
+![Dashboard filtrado por septiembre](screenshots/dashboard-filtro-mes.png)
+
+### Filtro por canal: Online
+
+![Dashboard filtrado por canal Online](screenshots/dashboard-filtro-canal.png)
+  
 
 ## Hallazgos comerciales de 2024
 
