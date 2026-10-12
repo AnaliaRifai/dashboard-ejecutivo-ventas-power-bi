@@ -22,15 +22,16 @@ El objetivo fue convertir los datos de ventas en información útil para el segu
 ## Estructura del repositorio
 
 ```text
-power-bi-sales-executive-dashboard/
+dashboard-ejecutivo-ventas-power-bi/
 ├── dataset/
 │   └── proyecto_powerbi_avanzado_dirty.xlsx
 ├── screenshots/
 │   ├── dashboard-general.png
 │   ├── dashboard-filtro-mes.png
 │   ├── dashboard-filtro-canal.png
-│   └── modelo-datos.png
-├── Proyecto Avanzado PBI Rifai.pbix
+│   ├── modelo-datos.png
+│   └── power-query-limpieza.png
+├── Dashboard-Ejecutivo-Ventas.pbix
 ├── medidas_dax_documentacion.md
 └── README.md
 ```
