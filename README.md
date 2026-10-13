@@ -1,4 +1,4 @@
-# Dashboard Ejecutivo de Ventas | Power BI
+# 📈 Dashboard Ejecutivo de Ventas | Power BI
 
 Proyecto de análisis de ventas de 2024 desarrollado en **Power BI** a partir de un archivo Excel con inconsistencias intencionales. El trabajo abarca la limpieza y validación de los datos, el modelado, la creación de medidas DAX y el diseño de un dashboard interactivo para evaluar resultados comerciales.
 
@@ -19,7 +19,7 @@ El objetivo fue convertir los datos de ventas en información útil para el segu
 4. ¿Qué clientes tuvieron mayor participación?
 5. ¿Qué canal aportó más ventas?
 
-## Estructura del repositorio
+## 🗂️ Estructura del repositorio
 
 ```text
 dashboard-ejecutivo-ventas-power-bi/
@@ -38,7 +38,7 @@ dashboard-ejecutivo-ventas-power-bi/
 
 La carpeta `dataset` contiene el Excel original y el archivo `.pbix` incluye el modelo de datos y el dashboard interactivo. Las capturas muestran el dashboard general, dos ejemplos de filtrado, el modelo de datos y el proceso de limpieza en Power Query.
 
-## Exploración y preparación de los datos (EDA y ETL)
+## ⏳ Exploración y preparación de los datos (EDA y ETL)
 
 Se partió de cinco tablas: **ventas, productos, clientes, canales y metas comerciales**.
 
@@ -61,7 +61,7 @@ Las medidas principales de facturación, unidades vendidas y transacciones conta
 
 Esta definición resultó fundamental: al corregir el indicador, el cumplimiento anual de metas pasó del **117,77 %** al **95,44 %**. El cambio muestra por qué es necesario validar el significado de cada métrica, además de comprobar que su fórmula funcione.
 
-## Modelo de datos
+## ⭐ Modelo de datos
 
 Se construyó un **modelo en estrella** con `TblFactVentas` como tabla central, relacionada mediante vínculos activos de uno a muchos y filtrado unidireccional con las dimensiones:
 
@@ -107,7 +107,7 @@ Se personalizaron las interacciones para preservar el contexto de comparación:
 ![Dashboard filtrado por canal Online](screenshots/dashboard-filtro-canal.png)
   
 
-## Hallazgos comerciales de 2024
+## 💎 Hallazgos comerciales de 2024
 
 ### 1. La meta anual no se alcanzó, aunque hubo seis meses consecutivos de cumplimiento
 
