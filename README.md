@@ -36,7 +36,7 @@ dashboard-ejecutivo-ventas-power-bi/
 └── README.md
 ```
 
-La carpeta `dataset` contiene el archivo original de trabajo. El archivo `.pbix` contiene el modelo y el informe interactivo. Las capturas documentan la vista general del dashboard, dos ejemplos de filtrado y el modelo de datos.
+La carpeta `dataset` contiene el Excel original y el archivo `.pbix` incluye el modelo de datos y el dashboard interactivo. Las capturas muestran el dashboard general, dos ejemplos de filtrado, el modelo de datos y el proceso de limpieza en Power Query.
 
 ## Exploración y preparación de los datos (EDA y ETL)
 
@@ -51,6 +51,9 @@ En **Power Query** se realizaron las principales transformaciones:
 - **Metas:** verificación de **36 registros**, correspondientes a los 12 meses de 2024 para los tres canales.
 
 Se revisó la calidad de las columnas relevantes y los campos necesarios para las relaciones y los indicadores.
+### Limpieza y transformación en Power Query
+
+![Transformación y calidad de datos en Power Query](screenshots/power-query-limpieza.png)
 
 ### Criterio comercial utilizado
 
