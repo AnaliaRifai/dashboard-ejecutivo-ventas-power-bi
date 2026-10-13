@@ -2,14 +2,14 @@
 
 Proyecto de análisis de ventas de 2024 desarrollado en **Power BI** a partir de un archivo Excel con inconsistencias intencionales. El trabajo abarca la limpieza y validación de los datos, el modelado, la creación de medidas DAX y el diseño de un dashboard interactivo para evaluar resultados comerciales.
 
-## Herramientas utilizadas
+## ⚙️ Herramientas utilizadas
 
 - **Excel:** fuente de datos del proyecto.
 - **Power Query:** limpieza, transformación y validación.
 - **Power BI:** modelo de datos, visualizaciones e interactividad.
 - **DAX:** indicadores de ventas, inteligencia temporal, rankings y cumplimiento de metas.
 
-## Objetivo y preguntas de negocio
+## ❔ Objetivo y preguntas de negocio
 
 El objetivo fue convertir los datos de ventas en información útil para el seguimiento comercial y responder:
 
@@ -76,7 +76,7 @@ La tabla calendario se creó con DAX, contiene las **366 fechas de 2024** y fue 
 
 ![Modelo de datos](screenshots/modelo-datos.png)
 
-## Medidas DAX
+## 📐 Medidas DAX
 
 Se desarrollaron **16 medidas**, organizadas en métricas base, cálculos temporales, rankings, participación de clientes, metas e insight automático.
 
@@ -84,7 +84,7 @@ Entre las funciones utilizadas se encuentran `CALCULATE`, `SUMX`, `DIVIDE`, `DIS
 
 Las fórmulas finales y sus explicaciones están en **[Documentación de medidas DAX](medidas_dax_documentacion.md)**.
 
-## Dashboard e interactividad
+## 🖥️ Dashboard e interactividad
 
 El informe permite explorar los resultados mediante cinco segmentadores: **Mes, País, Canal, Categoría y Segmento**. Incluye tarjetas de ventas, meta, cumplimiento, variación y ticket promedio; gráficos de evolución mensual, ventas frente a metas y desempeño por cliente, producto y canal; un ranking de clientes y un texto de insight generado con DAX.
 
@@ -146,7 +146,7 @@ El canal **Online** aportó aproximadamente **$475.878** (**38,3 %** del total),
 
 **Recomendación:** estudiar el potencial de crecimiento del canal junto con sus costos y comisiones. Mayor facturación no implica necesariamente mayor rentabilidad.
 
-## Conclusión
+## ✅ Conclusión
 
 El proyecto permitió recorrer un proceso de análisis de punta a punta: preparar datos con inconsistencias, construir un modelo de datos, definir indicadores de negocio, desarrollar un dashboard interactivo y convertir los resultados en hallazgos y recomendaciones.
 
