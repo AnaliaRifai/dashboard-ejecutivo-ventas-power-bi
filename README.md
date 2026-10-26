@@ -2,6 +2,12 @@
 
 Proyecto de análisis comercial desarrollado en **Power BI** a partir de datos simulados de una empresa ficticia del sector tecnológico. El objetivo es evaluar el desempeño de ventas de 2024, analizar el cumplimiento de metas e identificar oportunidades de mejora mediante indicadores y visualizaciones interactivas.
 
+## 🎯 Hallazgo principal
+
+> **El criterio de cálculo cambió la conclusión del negocio:** el cumplimiento anual de metas de 2024 pasó de **117,77 %** (cálculo inicial) a **95,44 %** al considerar únicamente las ventas de pedidos con estado **`Entregado`**. Por lo tanto, **la meta anual no se alcanzó**, aunque entre mayo y octubre hubo seis meses consecutivos de cumplimiento.
+
+Este resultado demuestra por qué es fundamental validar qué operaciones incluye cada indicador, además de comprobar que la fórmula DAX funcione correctamente.
+
 ## ⚙️ Herramientas utilizadas
 
 - **Excel:** fuente de datos del proyecto.
