@@ -33,6 +33,7 @@ dashboard-ejecutivo-ventas-power-bi/
 │   └── power-query-limpieza.png
 ├── Dashboard-Ejecutivo-Ventas.pbix
 ├── medidas_dax_documentacion.md
+├── analisis_comparativo_periodos_2024.md
 └── README.md
 ```
 
@@ -136,7 +137,9 @@ El análisis mensual permitió identificar **tres períodos**:
 
 El buen desempeño de mayo a octubre no fue suficiente para compensar los desvíos negativos del resto del año. Este patrón no se observa al mirar únicamente el KPI anual.
 
-**Recomendación:** comparar productos, clientes y canales de los meses de mayor cumplimiento con los períodos que quedaron por debajo de las metas, para identificar oportunidades de mejora. Los datos permiten detectar el patrón, pero no establecer sus causas sin un análisis adicional.
+**Profundización del hallazgo:** al comparar mayo–octubre con los otros seis meses de 2024, la facturación fue **50,07 % mayor**. Las ventas de **Laptop Air 13 y Laptop Pro 14** representaron **56,94 %** del período de cumplimiento, frente a **20,86 %** en el resto del año. A su vez, la participación del canal **Online** pasó de **31,50 %** a **42,75 %** (**+11,26 puntos porcentuales**). También se observaron diferencias en la distribución de compras por cliente.
+
+Estas cifras indican un **cambio en la composición de ventas**, pero **no prueban que esos factores causaran el cumplimiento de metas**. Las matrices exploratorias, fórmulas de porcentaje, datos por cliente y criterios de comparación están documentados en [Análisis comparativo de períodos 2024](analisis_comparativo_periodos_2024.md).
 
 ### 2. Dos laptops concentraron una parte importante de la facturación
 
