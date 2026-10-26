@@ -78,7 +78,7 @@ La tabla calendario se creó con DAX, contiene las **366 fechas de 2024** y fue 
 
 ## 📐 Medidas DAX
 
-Se desarrollaron **17 medidas**, organizadas en métricas base, cálculos temporales, rankings, participación de clientes, metas e insight automático.
+Se documentaron **22 medidas DAX**: las 17 del análisis original y cinco medidas nuevas de rentabilidad, comprobadas en la versión local de Power BI. Estas últimas se incorporarán al archivo `.pbix` publicado al finalizar la revisión del dashboard.
 
 Entre las funciones utilizadas se encuentran `CALCULATE`, `SUMX`, `DIVIDE`, `DISTINCTCOUNT`, `DATEADD`, `TOTALYTD`, `RANKX`, `REMOVEFILTERS`, `TREATAS`, `TOPN` y `SWITCH`.
 
@@ -108,6 +108,14 @@ Se personalizaron las interacciones para preservar el contexto de comparación:
 
 ![Dashboard filtrado por canal Online](screenshots/dashboard-filtro-canal.png)
   
+
+## 💰 Rentabilidad por canal (mejora en desarrollo)
+
+Se incorporaron y validaron en la versión local de Power BI medidas de **costo de productos vendidos, margen bruto, comisiones, margen después de comisiones y margen porcentual**. Bajo el criterio de pedidos entregados, el margen después de costos de productos y comisiones fue de **$341.220,28 (27,43 % de las ventas)**.
+
+En la comparación por canal, **Online** presentó el mayor margen monetario (**$133.828,71**) y porcentual (**28,12 %**), seguido de Distribuidor (**27,41 %**) y Tienda (**26,58 %**). El cálculo descuenta costos de productos y comisiones, pero **no representa utilidad neta**. Los cálculos y resultados están documentados en [medidas DAX](medidas_dax_documentacion.md).
+
+> **Estado de publicación:** estas medidas se validaron en el archivo local y están documentadas aquí; el `.pbix` y las capturas de GitHub se actualizarán al finalizar las correcciones.
 
 ## 💎 Hallazgos comerciales de 2024
 
