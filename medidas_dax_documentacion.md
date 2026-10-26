@@ -1,6 +1,6 @@
-# Documentación de medidas DAX | Dashboard Ejecutivo de Ventas
+# Documentación de medidas DAX | Análisis de ventas y cumplimiento de metas
 
-Este archivo reúne las **17 medidas DAX** utilizadas en el análisis comercial de 2024. Las métricas principales de ventas, unidades y transacciones consideran únicamente los pedidos con estado `Entregado`. Los demás estados se conservan en el modelo para posibles análisis adicionales.
+Este archivo reúne las **22 medidas DAX documentadas** del análisis comercial de 2024 (17 originales y cinco nuevas de rentabilidad validadas en la versión local). Las métricas principales de ventas, unidades y transacciones consideran únicamente los pedidos con estado `Entregado`. Los demás estados se conservan en el modelo para posibles análisis adicionales.
 
 > **Criterio de interpretación:** las cifras de ventas se refieren a facturación por pedidos entregados, no a utilidad. Las medidas temporales están orientadas al análisis mensual del dataset de 2024.
 
@@ -131,6 +131,7 @@ IF(
 - **Enero de 2024:** muestra `Sin período anterior`, ya que no se dispone de diciembre de 2023 para la comparación.
 
 Esta medida corrige el `--` que aparecía en la tarjeta general sin cambiar el cálculo de variación mensual.
+
 ### Ventas Acumuladas
 
 Calcula las ventas acumuladas desde el comienzo del año hasta la fecha del contexto.
@@ -302,6 +303,92 @@ RETURN
 & NombreProductoTop
 & "."
 ```
+
+## 6. Análisis de rentabilidad por canal (medidas nuevas)
+
+Estas cinco medidas se calcularon y comprobaron en la **versión local de Power BI** durante la revisión del proyecto. El archivo `.pbix` publicado y las capturas del repositorio se actualizarán cuando finalicen los cambios del dashboard.
+
+**Criterios de negocio:** solo se consideran pedidos con estado `Entregado`. El costo por operación se calcula con `TblFactVentas[CostoUnitario]`, multiplicado por `Cantidad`. El ingreso corresponde al precio unitario con el descuento aplicado. La comisión se calcula sobre ese ingreso después del descuento y toma el porcentaje correspondiente a cada canal mediante la relación del modelo (`RELATED`). El margen después de comisiones **no equivale a la utilidad neta**, porque no descuenta otros gastos, impuestos ni costos no representados en el dataset.
+
+### Costo Productos Vendidos
+
+Suma el costo de los artículos de pedidos entregados, según la cantidad y el costo unitario de cada transacción.
+
+```dax
+Costo Productos Vendidos =
+CALCULATE(
+    SUMX(
+        TblFactVentas,
+        TblFactVentas[Cantidad] *
+        TblFactVentas[CostoUnitario]
+    ),
+    TblFactVentas[EstadoPedido] = "Entregado"
+)
+```
+
+### Margen Bruto
+
+Calcula el margen monetario después del costo de los productos y antes de las comisiones.
+
+```dax
+Margen Bruto =
+[Ventas_Totales] - [Costo Productos Vendidos]
+```
+
+### Comisiones Ventas
+
+Calcula las comisiones correspondientes a ventas entregadas, aplicando el porcentaje asociado a cada canal al importe después del descuento.
+
+```dax
+Comisiones Ventas =
+CALCULATE(
+    SUMX(
+        TblFactVentas,
+        TblFactVentas[PrecioUnitario] *
+        TblFactVentas[Cantidad] *
+        (1 - TblFactVentas[Descuento]) *
+        RELATED(TblDimCanal[ComisionPct])
+    ),
+    TblFactVentas[EstadoPedido] = "Entregado"
+)
+```
+
+**Porcentajes observados en la dimensión de canales:** Online 3,5 %, Tienda 2 % y Distribuidor 5 %.
+
+### Margen Despues de Comisiones
+
+Calcula cuánto queda de las ventas después de descontar costos de productos y comisiones comerciales, sin contemplar otros gastos.
+
+```dax
+Margen Despues de Comisiones =
+[Margen Bruto] - [Comisiones Ventas]
+```
+
+### Margen Despues de Comisiones %
+
+Expresa el margen después de comisiones como proporción de la facturación de pedidos entregados en el contexto de filtros.
+
+```dax
+Margen Despues de Comisiones % =
+DIVIDE(
+    [Margen Despues de Comisiones],
+    [Ventas_Totales],
+    BLANK()
+)
+```
+
+### Resultados comprobados: año 2024, sin filtros
+
+| Canal | Ventas entregadas | Margen bruto | Comisiones | Margen después de comisiones | Margen % |
+|---|---:|---:|---:|---:|---:|
+| Online | $475.877,55 | $150.484,42 | $16.655,71 | $133.828,71 | 28,12 % |
+| Distribuidor | $386.256,61 | $125.182,67 | $19.312,83 | $105.869,84 | 27,41 % |
+| Tienda | $381.974,34 | $109.161,22 | $7.639,49 | $101.521,74 | 26,58 % |
+| **Total** | **$1.244.108,50** | **$384.828,31** | **$43.608,03** | **$341.220,28** | **27,43 %** |
+
+**Interpretación:** Online presenta la mayor facturación y el mayor margen después de comisiones, tanto absoluto como porcentual, entre los tres canales. Se trata de un **margen comercial parcial**, no de un análisis completo de rentabilidad neta. Las diferencias de porcentaje deben interpretarse con cautela y no atribuirse a una causa sin un análisis adicional.
+
+---
 
 ## Validación de referencia: 2024
 
