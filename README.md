@@ -78,7 +78,7 @@ La tabla calendario se creó con DAX, contiene las **366 fechas de 2024** y fue 
 
 ## 📐 Medidas DAX
 
-Se desarrollaron **16 medidas**, organizadas en métricas base, cálculos temporales, rankings, participación de clientes, metas e insight automático.
+Se desarrollaron **17 medidas**, organizadas en métricas base, cálculos temporales, rankings, participación de clientes, metas e insight automático.
 
 Entre las funciones utilizadas se encuentran `CALCULATE`, `SUMX`, `DIVIDE`, `DISTINCTCOUNT`, `DATEADD`, `TOTALYTD`, `RANKX`, `REMOVEFILTERS`, `TREATAS`, `TOPN` y `SWITCH`.
 
@@ -87,6 +87,8 @@ Las fórmulas finales y sus explicaciones están en **[Documentación de medidas
 ## 🖥️ Dashboard e interactividad
 
 El informe permite explorar los resultados mediante cinco segmentadores: **Mes, País, Canal, Categoría y Segmento**. Incluye tarjetas de ventas, meta, cumplimiento, variación y ticket promedio; gráficos de evolución mensual, ventas frente a metas y desempeño por cliente, producto y canal; un ranking de clientes y un texto de insight generado con DAX.
+
+La tarjeta **VARIACIÓN %** utiliza una medida de presentación adicional (`Variacion % Tarjeta`): en la vista general indica **«Seleccioná un mes»**, muestra el porcentaje cuando existe una comparación mensual válida y señala **«Sin período anterior»** cuando no hay base de comparación. La medida numérica original se conserva para los cálculos.
 
 Se personalizaron las interacciones para preservar el contexto de comparación:
 
