@@ -1,6 +1,6 @@
 # Documentación de medidas DAX | Dashboard Ejecutivo de Ventas
 
-Este archivo reúne las **16 medidas DAX** utilizadas en el análisis comercial de 2024. Las métricas principales de ventas, unidades y transacciones consideran únicamente los pedidos con estado `Entregado`. Los demás estados se conservan en el modelo para posibles análisis adicionales.
+Este archivo reúne las **17 medidas DAX** utilizadas en el análisis comercial de 2024. Las métricas principales de ventas, unidades y transacciones consideran únicamente los pedidos con estado `Entregado`. Los demás estados se conservan en el modelo para posibles análisis adicionales.
 
 > **Criterio de interpretación:** las cifras de ventas se refieren a facturación por pedidos entregados, no a utilidad. Las medidas temporales están orientadas al análisis mensual del dataset de 2024.
 
@@ -107,6 +107,30 @@ IF(
 )
 ```
 
+### Variacion % Tarjeta
+
+Medida de **presentación** para la tarjeta `VARIACIÓN %`. Conserva la medida numérica `[Variacion %]` para cálculos y otras visualizaciones, y devuelve un texto informativo en los casos en que no corresponde mostrar un porcentaje. Al utilizar `FORMAT`, esta medida devuelve texto y se usa únicamente en la tarjeta.
+
+```dax
+Variacion % Tarjeta =
+IF(
+    NOT HASONEVALUE('Tabla Calendario'[NombreMesLargo]),
+    "Seleccioná un mes",
+    IF(
+        ISBLANK([Variacion %]),
+        "Sin período anterior",
+        FORMAT([Variacion %], "0.0%")
+    )
+)
+```
+
+**Comprobaciones en el dashboard:**
+
+- **Vista general (sin un único mes seleccionado):** muestra `Seleccioná un mes`.
+- **Febrero de 2024:** muestra `42,8 %`, consistente con el insight automático (`42,80 %`).
+- **Enero de 2024:** muestra `Sin período anterior`, ya que no se dispone de diciembre de 2023 para la comparación.
+
+Esta medida corrige el `--` que aparecía en la tarjeta general sin cambiar el cálculo de variación mensual.
 ### Ventas Acumuladas
 
 Calcula las ventas acumuladas desde el comienzo del año hasta la fecha del contexto.
