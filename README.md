@@ -33,6 +33,7 @@ dashboard-ejecutivo-ventas-power-bi/
 │   └── datos_ventas_tecnologia_2024.xlsx
 ├── screenshots/
 │   ├── dashboard-general.png
+│   ├── dashboard-rentabilidad.png
 │   ├── dashboard-filtro-mes.png
 │   ├── dashboard-filtro-canal.png
 │   ├── modelo-datos.png
@@ -43,7 +44,7 @@ dashboard-ejecutivo-ventas-power-bi/
 └── README.md
 ```
 
-La carpeta `dataset` contiene el Excel original y el archivo `.pbix` incluye el modelo de datos y el dashboard interactivo. Las capturas muestran el dashboard general, dos ejemplos de filtrado, el modelo de datos y el proceso de limpieza en Power Query.
+La carpeta `dataset` contiene los datos fuente del proyecto y el archivo `.pbix` incluye el modelo de datos y el informe interactivo de **dos páginas**: **Resumen ejecutivo** y **Análisis de rentabilidad**. Las capturas muestran ambas páginas, dos ejemplos de filtrado, el modelo de datos y el proceso de limpieza en Power Query.
 
 ## ⏳ Exploración y preparación de los datos (EDA y ETL)
 
@@ -85,7 +86,7 @@ La tabla calendario se creó con DAX, contiene las **366 fechas de 2024** y fue 
 
 ## 📐 Medidas DAX
 
-Se documentaron **22 medidas DAX**: las 17 del análisis original y cinco medidas nuevas de rentabilidad, comprobadas en la versión local de Power BI. Estas últimas se incorporarán al archivo `.pbix` publicado al finalizar la revisión del dashboard.
+Se documentaron **22 medidas DAX**: las 17 del análisis original y cinco medidas adicionales de rentabilidad, incluidas en el archivo `.pbix` actualizado.
 
 Entre las funciones utilizadas se encuentran `CALCULATE`, `SUMX`, `DIVIDE`, `DISTINCTCOUNT`, `DATEADD`, `TOTALYTD`, `RANKX`, `REMOVEFILTERS`, `TREATAS`, `TOPN` y `SWITCH`.
 
@@ -93,7 +94,7 @@ Las fórmulas finales y sus explicaciones están en **[Documentación de medidas
 
 ## 🖥️ Dashboard e interactividad
 
-El informe permite explorar los resultados mediante cinco segmentadores: **Mes, País, Canal, Categoría y Segmento**. Incluye tarjetas de ventas, meta, cumplimiento, variación y ticket promedio; gráficos de evolución mensual, ventas frente a metas y desempeño por cliente, producto y canal; un ranking de clientes y un texto de insight generado con DAX.
+La página **Resumen ejecutivo** permite explorar los resultados mediante cinco segmentadores: **Mes, País, Canal, Categoría y Segmento**. Incluye tarjetas de ventas, meta, cumplimiento, variación y ticket promedio; gráficos de evolución mensual, ventas frente a metas y desempeño por cliente, producto y canal; un ranking de clientes y un texto de insight generado con DAX. La segunda página, **Análisis de rentabilidad**, compara márgenes y comisiones por canal. Ambas páginas están conectadas mediante botones de navegación.
 
 La tarjeta **VARIACIÓN %** utiliza una medida de presentación adicional (`Variacion % Tarjeta`): en la vista general indica **«Seleccioná un mes»**, muestra el porcentaje cuando existe una comparación mensual válida y señala **«Sin período anterior»** cuando no hay base de comparación. La medida numérica original se conserva para los cálculos.
 
@@ -116,13 +117,15 @@ Se personalizaron las interacciones para preservar el contexto de comparación:
 ![Dashboard filtrado por canal Online](screenshots/dashboard-filtro-canal.png)
   
 
-## 💰 Rentabilidad por canal (mejora en desarrollo)
+## 💰 Rentabilidad por canal
 
-Se incorporaron y validaron en la versión local de Power BI medidas de **costo de productos vendidos, margen bruto, comisiones, margen después de comisiones y margen porcentual**. Bajo el criterio de pedidos entregados, el margen después de costos de productos y comisiones fue de **$341.220,28 (27,43 % de las ventas)**.
+Se incorporaron al informe medidas de **costo de productos vendidos, margen bruto, comisiones, margen después de comisiones y margen porcentual**. Bajo el criterio de pedidos entregados, el margen después de costos de productos y comisiones fue de **$341.220,28 (27,43 % de las ventas)**.
 
 En la comparación por canal, **Online** presentó el mayor margen monetario (**$133.828,71**) y porcentual (**28,12 %**), seguido de Distribuidor (**27,41 %**) y Tienda (**26,58 %**). El cálculo descuenta costos de productos y comisiones, pero **no representa utilidad neta**. Los cálculos y resultados están documentados en [medidas DAX](medidas_dax_documentacion.md).
 
-> **Estado de publicación:** estas medidas se validaron en el archivo local y están documentadas aquí; el `.pbix` y las capturas de GitHub se actualizarán al finalizar las correcciones.
+### Página: Análisis de rentabilidad
+
+![Dashboard de análisis de rentabilidad](screenshots/dashboard-rentabilidad.png)
 
 ## 💎 Hallazgos comerciales de 2024
 
