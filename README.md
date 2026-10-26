@@ -24,7 +24,7 @@ El objetivo fue convertir los datos de ventas en información útil para el segu
 ```text
 dashboard-ejecutivo-ventas-power-bi/
 ├── dataset/
-│   └── proyecto_powerbi_avanzado_dirty.xlsx
+│   └── datos_ventas_tecnologia_2024.xlsx
 ├── screenshots/
 │   ├── dashboard-general.png
 │   ├── dashboard-filtro-mes.png
