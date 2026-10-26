@@ -1,6 +1,6 @@
-# 📈 Dashboard Ejecutivo de Ventas | Power BI
+# 📈 Análisis de ventas y cumplimiento de metas | Power BI — 2024
 
-Proyecto de análisis de ventas de 2024 desarrollado en **Power BI** a partir de un archivo Excel con inconsistencias intencionales. El trabajo abarca la limpieza y validación de los datos, el modelado, la creación de medidas DAX y el diseño de un dashboard interactivo para evaluar resultados comerciales.
+Proyecto de análisis comercial desarrollado en **Power BI** a partir de datos simulados de una empresa ficticia del sector tecnológico. El objetivo es evaluar el desempeño de ventas de 2024, analizar el cumplimiento de metas e identificar oportunidades de mejora mediante indicadores y visualizaciones interactivas.
 
 ## ⚙️ Herramientas utilizadas
 
