@@ -46,6 +46,17 @@ dashboard-ejecutivo-ventas-power-bi/
 
 La carpeta `dataset` contiene los datos fuente del proyecto y el archivo `.pbix` incluye el modelo de datos y el informe interactivo de **dos páginas**: **Resumen ejecutivo** y **Análisis de rentabilidad**. Las capturas muestran ambas páginas, dos ejemplos de filtrado, el modelo de datos y el proceso de limpieza en Power Query.
 
+## 📥 Cómo abrir y actualizar el proyecto
+
+1. Descargar [el archivo de Power BI](Dashboard-Ejecutivo-Ventas.pbix) y [el Excel de origen](dataset/datos_ventas_tecnologia_2024.xlsx) desde este repositorio.
+2. Abrir el archivo `.pbix` con **Power BI Desktop**. El informe contiene datos cargados y puede explorarse sin actualizar el origen.
+3. Para **actualizar los datos**, ir a **Archivo → Opciones y configuración → Configuración de origen de datos**.
+4. En **Orígenes de datos en el archivo actual**, seleccionar la conexión de Excel y hacer clic en **Cambiar origen...**. Indicar la ubicación donde se descargó `datos_ventas_tecnologia_2024.xlsx` y confirmar.
+5. Ejecutar **Actualizar** en Power BI Desktop para volver a cargar los datos desde ese archivo.
+
+**Nota de reproducibilidad:** el `.pbix` se desarrolló con un Excel local llamado `proyecto_powerbi_avanzado_dirty.xlsx`. En GitHub, ese mismo archivo fuente está publicado como `datos_ventas_tecnologia_2024.xlsx`. La conexión almacenada en Power BI hace referencia a una ruta local de la computadora donde se desarrolló el informe; por eso, **cada persona que desee actualizar los datos debe configurar el origen con su propia ruta**. No es necesario renombrar el Excel descargado.
+
+
 ## ⏳ Exploración y preparación de los datos (EDA y ETL)
 
 Se partió de cinco tablas: **ventas, productos, clientes, canales y metas comerciales**.
